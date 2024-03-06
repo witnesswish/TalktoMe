@@ -6,11 +6,19 @@
 #include <string.h>
 #include <fcntl.h>
 
+#include "Server.h"
+
+int main()
+{
+    Server serv;
+    serv.Initializer();
+}
+
 struct sockaddr_in serv_addr;
 struct sockaddr_in6 serv_addr6;
 std::list<int> clients;
 
-int main()
+int main1()
 {
     /**
     if(daemon(0, 0))
