@@ -3,6 +3,13 @@
 
 #include <list>
 #include <ctime>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <string.h>
+#include <unistd.h>
+
+#define EPOLL_SIZE 5000
 
 class Server
 {
@@ -12,10 +19,14 @@ public:
     void Initializer();
     void StartServer();
     void CloseServer();
+    int read_cb(int fd);
 private:
     int master;
-    std::list<int> online_user;
-
+    int epfd;
+    static std::list<int> online_user;
+    struct sockaddr_in ServAddr;
+    char RecvBuffer[100];
+    char SendBuffer[100];
 };
 
 #endif // TALKTOME_SERVER_H
